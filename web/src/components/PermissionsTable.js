@@ -1,10 +1,12 @@
 import React from 'react'
+import {Badge} from "reactstrap";
 
 const PermissionsTable = props => (
     <table>
         <thead>
         <tr>
             <th>Name</th>
+            <th>Subpermissions</th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -13,7 +15,9 @@ const PermissionsTable = props => (
             props.permissions.map(permission => (
                 <tr key={permission.id}>
                     <td>{permission.name}</td>
-                    <td>{permission.username}</td>
+                    <td>
+                        {permission.subPermissions ? permission.subPermissions.map(sub => (<Badge color="info" style={{marginLeft: "2px", marginRight: "2px"}}> {sub.name} </Badge>)) : ""}
+                    </td>
                     <td>
                         <button
                             onClick={() => {

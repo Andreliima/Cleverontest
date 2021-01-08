@@ -8,22 +8,24 @@ import ee.liima.cleverontest.model.Permission;
 import java.io.IOException;
 import java.util.List;
 
-public class SubPermissionsListSerializer extends StdSerializer<List<Permission>> {
+public class CustomPermissionsListSerializer extends StdSerializer<List<Permission>> {
 
-    public SubPermissionsListSerializer() {
+    public CustomPermissionsListSerializer() {
         this(null);
     }
 
-    public SubPermissionsListSerializer(Class<List<Permission>> t) {
+    public CustomPermissionsListSerializer(Class<List<Permission>> t) {
         super(t);
     }
 
     @Override
     public void serialize(List<Permission> value, JsonGenerator gen, SerializerProvider provider) throws IOException {
-        gen.writeStartObject();
-        gen.writeNumberField("id", value.getId());
-        gen.writeStringField("name", value.getName());
-        gen.writeEndObject();
+        var permissionSerializer = new CustomPermissionSerializer();
+        gen.writeStartArray();
+        for (Permission permission : value) {
+            permissionSerializer.serialize(permission, gen, provider);
+        }
+        gen.writeEndArray();
 
     }
 }

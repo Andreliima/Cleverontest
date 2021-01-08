@@ -7,13 +7,13 @@ import ee.liima.cleverontest.model.Permission;
 
 import java.io.IOException;
 
-public class ParentPermissionSerializer extends StdSerializer<Permission> {
+public class CustomPermissionSerializer extends StdSerializer<Permission> {
 
-    public ParentPermissionSerializer() {
+    public CustomPermissionSerializer() {
         this(null);
     }
 
-    public ParentPermissionSerializer(Class<Permission> t) {
+    public CustomPermissionSerializer(Class<Permission> t) {
         super(t);
     }
 
@@ -23,8 +23,7 @@ public class ParentPermissionSerializer extends StdSerializer<Permission> {
         gen.writeStartObject();
         gen.writeNumberField("id", value.getId());
         gen.writeStringField("name", value.getName());
-        gen.writeFieldName("parent");
-        gen.
+        gen.writeEndObject();
 
     }
 }

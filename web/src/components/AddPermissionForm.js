@@ -14,7 +14,7 @@ const AddPermissionForm = props => {
         <form
             onSubmit={event => {
                 event.preventDefault()
-                if (!permission.name || !permission.username) return
+                if (!permission.name) return
 
                 props.addPermission(permission)
                 setPermission(initialFormState)
